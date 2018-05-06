@@ -1,5 +1,5 @@
 /*
- * deep.js v0.1
+ * match.js v0.1
  * Copyright (c) 2018 Onur Kerimov
  * http://github.com/onurkerimov
  * Licensed under the MIT license
