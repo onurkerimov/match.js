@@ -1,15 +1,25 @@
 # match.js
 **match.js** is a small plugin that you can include in your projects and libraries. Its aim is to prevent repetitive syntax usage in if/else statements and defy the ugliness of both switch/case and if/else. The following is a self-explanatory example.
 
-With **match.js** loaded, you can write this:
+With **match.js**, this plain javascript example:
 ```js
-match(target)
-    .case(["div-1", "div-2", "div-3"])
-    .do([1, 2, 3], (el) => divType = el)
-    .do(["first", "second", "third", "no"], (el) => console.log(el + ' div clicked'))
-    .do(["red", "green", "blue"], (el) => document.body.style.backgroundColor = el)
+if (target === "div-1") {
+    divType = 1
+    console.log('first div clicked')
+    document.body.style.backgroundColor = "red"
+} else if (target === "div-2") {
+    divType = 2
+    console.log('second div clicked')
+    document.body.style.backgroundColor = "green"
+} else if (target === "div-3") {
+    divType = 3
+    console.log('third div clicked')
+    document.body.style.backgroundColor = "blue"
+} else {
+    console.log('no div clicked')
+}
 ```
-or this:
+turns into this:
 ```js
 match(target)
     .case(["div-1", "div-2", "div-3"])
@@ -28,35 +38,28 @@ match(target)
         () => document.body.style.backgroundColor = "blue",
     ])
 ```
-instead of this vanilla javascript implementation:
+You can even shorten it further, preventing repetition in code:
 ```js
-if (target === "div-1") {
-    divType = 1
-    console.log('first div clicked')
-    document.body.style.backgroundColor = "red"
-} else if (target === "div-2") {
-    divType = 2
-    console.log('second div clicked')
-    document.body.style.backgroundColor = "green"
-} else if (target === "div-3") {
-    divType = 3
-    console.log('third div clicked')
-    document.body.style.backgroundColor = "blue"
-} else {
-    console.log('no div clicked')
-}
+match(target)
+    .case(["div-1", "div-2", "div-3"])
+    .do([1, 2, 3], (el) => divType = el)
+    .do([
+        () => console.log('first div clicked'),
+        () => console.log('second div clicked'),
+        () => console.log('third div clicked'),
+        () => console.log('no div clicked')
+    ])
+    .do(["red", "green", "blue"], (el) => document.body.style.backgroundColor = el)
 ```
 
-All three codes achieve the same functionality. In the first snippet, the code is much shorter than the vanilla javascript version. The second snippet is more readable and ordered.
-
-**Does readability increase?** Well yes, even before you get used to the above articulation. 
+**Does readability increase?** Well yes, even before you get used to the above articulation. Here, the ordering is the most important aspect about readability. Same ordering (like-next-to-like) can't be achieved with if-else or switch-case.
 
 **Ease of maintenance?** Improves significantly. Definitely results in more scalable code.
 
 **Speed?** The above example is just 50% slower than its if/else complement. Not bad. (See the benchmark in https://jsperf.com/matchcase) However, you need to be careful when writing functions inside the array. (See below)
 
 ### A Small Warning
-Everything you write inside the array of `.do(array,function)` gets automatically evaluated. Writing strings or numbers is safe, however if you decide to write functions in there, like `[fn1(),fn2()]`, make sure you do it in this fashion: `[() => fn1(), () => fn2()]`. This way, they do not get automatically evaluated and slow down the code. To sum up with an example:
+Everything you write inside the `array` variable of `.do(array,function)` gets automatically evaluated before. Writing strings or numbers is safe, however if you decide to write functions in there, like `[fn1(),fn2()]`, make sure you do it in this fashion: `[() => fn1(), () => fn2()]`. This way, they do not get automatically evaluated and slow down the code. See:
 
 Do **not**:
 ```js

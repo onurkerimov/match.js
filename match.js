@@ -39,9 +39,5 @@ window.match = (function() {
         return this
     }
 
-    var init = function(val) {
-        return new _match(val)
-    }
-
-    return init
+    return new _match(val)
 }())
