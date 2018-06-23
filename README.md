@@ -1,5 +1,5 @@
 # match.js
-**match.js** is a small plugin that you can include in your projects and libraries. Its aim is to prevent repetitive syntax usage in if/else statements and defy the ugliness of both switch/case and if/else. The following is a self-explanatory example.
+**match.js** is a small plugin that you can include in your projects and libraries. Its aim is to prevent repetitive syntax usage in if/else statements and defy the ugliness of both switch/case and if/else.
 
 With **match.js**, this plain javascript example:
 ```js
