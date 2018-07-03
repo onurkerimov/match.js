@@ -52,14 +52,14 @@ match(target)
     .do(["red", "green", "blue"], (el) => document.body.style.backgroundColor = el)
 ```
 
-**Does readability increase?** Well yes, even before you get used to the above articulation. Here, the ordering is the most important aspect about readability. Same ordering (like-next-to-like) can't be achieved with if-else or switch-case.
+**Does readability increase?** Well yes, even before you get used to the above articulation. The ordering makes iteasy to read. This ordering can't be achieved with clsasical if-else or switch-case.
 
 **Ease of maintenance?** Improves significantly. Definitely results in more scalable code.
 
-**Speed?** The above example is just 50% slower than its if/else complement. Not bad. (See the benchmark in https://jsperf.com/matchcase) However, you need to be careful when writing functions inside the array. (See below)
+**Speed?** The above example is just 50% slower than its if/else complement. Not bad. (See the benchmark in https://jsperf.com/matchcase)
 
 ### A Small Warning
-Everything you write inside the `array` variable of `.do(array,function)` gets automatically evaluated before. Writing strings or numbers is safe, however if you decide to write functions in there, like `[fn1(),fn2()]`, make sure you do it in this fashion: `[() => fn1(), () => fn2()]`. This way, they do not get automatically evaluated and slow down the code. See:
+Everything you write inside the `array` variable of `.do(array,function)` gets automatically evaluated. Writing strings or numbers is safe, however if you write functions like `[fn1(),fn2()]`, make sure you do it in this fashion: `[() => fn1(), () => fn2()]`. This way, they do not get automatically evaluated and slow down the code. See:
 
 Do **not**:
 ```js
