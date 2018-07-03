@@ -52,7 +52,7 @@ match(target)
     .do(["red", "green", "blue"], (el) => document.body.style.backgroundColor = el)
 ```
 
-**Does readability increase?** Well yes, even before you get used to the above articulation. The ordering makes iteasy to read. This ordering can't be achieved with clsasical if-else or switch-case.
+**Does readability increase?** Well yes, even before you get used to the above articulation. The ordering makes iteasy to read. This ordering can't be achieved with classical if-else or switch-case.
 
 **Ease of maintenance?** Improves significantly. Definitely results in more scalable code.
 
